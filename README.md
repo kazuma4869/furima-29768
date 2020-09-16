@@ -44,18 +44,18 @@ Things you may want to cover:
 - has_many :purchases
 
 ## items テーブル
-
-| Column             | Type   | Options      |
-| ------------------ | ------ | ----------- |
-| name               | string | null: false |
-| price              |integer | null: false |
-| category_id        |integer | null: false |
-| status_id          |integer | null: false |
-| fee_id             |integer | null: false |
-| prefecture_id      |integer | null: false |
-| shipment_id        |integer | null: false |
-| item_id            |integer | null: false |
-| user_id            |integer | null: false |
+ 
+| Column             | Type      | Options                      |
+| ------------------ | --------- | ---------------------------- |
+| name               | string    | null: false                  |
+| price              |integer    | null: false                  |
+| category_id        |integer    | null: false                  |
+| status_id          |integer    | null: false                  |
+| fee_id             |integer    | null: false                  |
+| prefecture_id      |integer    | null: false                  |
+| shipment_id        |integer    | null: false                  |
+| item_id            |references | null: false foreign_key: true|
+| user_id            |references | null: false foreign_key: true|
 
 
 ### Association
@@ -68,7 +68,7 @@ Things you may want to cover:
 | Column        | Type   | Options     |
 | ------------- | ------ | ----------- |
 | house_code    | string | null: false |
-| prefecture    | integer| null: false |
+| prefecture_id | integer| null: false |
 | city          | string | null: false |
 | house_address | string | null: false |
 | house_name    | string |             |
@@ -78,6 +78,7 @@ Things you may want to cover:
 
 - belongs_to :item
 - belongs_to :user
+- has_one :management
 
 ## management テーブル
 
@@ -88,3 +89,5 @@ Things you may want to cover:
 
 ### Association
 - belongs_to :item
+- belongs_to :user
+- belongs_to :purchase
