@@ -54,37 +54,37 @@ Things you may want to cover:
 | fee_id             |integer | null: false |
 | prefecture_id      |integer | null: false |
 | shipment_id        |integer | null: false |
+| item_id            |integer | null: false |
+| user_id            |integer | null: false |
 
 
 ### Association
 
-- belongs_to :users
-- has_one :managements
+- belongs_to :user
+- has_one :management
 
 ## purchases テーブル
 
 | Column        | Type   | Options     |
 | ------------- | ------ | ----------- |
-| card_number   |integer | null: false |
-| limited_date  |integer | null: false |
-| house_code    |integer | null: false |
-| prefecture    | string | null: false |
+| house_code    | string | null: false |
+| prefecture    | integer| null: false |
 | city          | string | null: false |
 | house_address | string | null: false |
 | house_name    | string |             |
-| telephone     | integer| null: false |
+| telephone     | string | null: false |
  
 ### Association
 
-- belongs_to :items
-- belongs_to :users
+- belongs_to :item
+- belongs_to :user
 
 ## management テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| items  | references | null: false, foreign_key: true |
-| users  | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
+| user   | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :items
+- belongs_to :item
