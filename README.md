@@ -54,7 +54,6 @@ Things you may want to cover:
 | fee_id             |integer    | null: false                  |
 | prefecture_id      |integer    | null: false                  |
 | shipment_id        |integer    | null: false                  |
-| item               |references | null: false foreign_key: true|
 | user               |references | null: false foreign_key: true|
 
 
