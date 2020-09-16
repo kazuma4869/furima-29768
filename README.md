@@ -32,65 +32,59 @@ Things you may want to cover:
 | nickname   | string | null: false |
 | email      | string | null: false |
 | password   | string | null: false |
-| first name | string | null: false |
-| last name  | string | null: false |
-| first name1| string | null: false |
-| last name2 | string | null: false |
-| birth year | integer| null: false |
-| birth month| integer| null: false |
-| birth day  | integer| null: false |
+| first_name | string | null: false |
+| last_name  | string | null: false |
+| first_name1| string | null: false |
+| last_name2 | string | null: false |
+| birth_date | date   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :purchases
-- has_many :comments
 
 ## items テーブル
 
-| Column           | Type   | Options     |
-| ---------------- | ------ | ----------- |
-| name             | string | null: false |
-| images           |  text  | null: false |
-| price            |integer | null: false |
-| category         | string | null: false |
-| status           | string | null: false |
-| fee              |integer | null: false |
-| prefecture       | string | null: false |
-| date of shipment |datetime| null: false |
+| Column             | Type   | Options      |
+| ------------------ | ------ | ----------- |
+| name               | string | null: false |
+| price              |integer | null: false |
+| category_id        |integer | null: false |
+| status_id          |integer | null: false |
+| fee_id             |integer | null: false |
+| prefecture_id      |integer | null: false |
+| shipment_id        |integer | null: false |
 
 
 ### Association
 
 - belongs_to :users
-- has_one :comments
+- has_one :managements
 
 ## purchases テーブル
 
-| Column | Type   | Options     |
-| ------ | ------ | ----------- |
-| info   |integer | null: false |
-| limit1 |integer | null: false |
-| limit2 |integer | null: false |
-| code   |integer | null: false |
-| address|integer | null: false |
-| prefect| string | null: false |
-| city   | string | null: false |
-| house  | string | null: false |
-| h-name | string |             |
-| tel_num| integer| null: false |
+| Column        | Type   | Options     |
+| ------------- | ------ | ----------- |
+| card_number   |integer | null: false |
+| limited_date  |integer | null: false |
+| house_code    |integer | null: false |
+| prefecture    | string | null: false |
+| city          | string | null: false |
+| house_address | string | null: false |
+| house_name    | string |             |
+| telephone     | integer| null: false |
  
 ### Association
 
 - belongs_to :items
 - belongs_to :users
 
-## comments テーブル
+## management テーブル
 
 | Column | Type       | Options                        |
 | ------ | ---------- | ------------------------------ |
-| comment| string     |                                |
-| user   | references | null: false, foreign_key: true |
+| items  | references | null: false, foreign_key: true |
+| users  | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
+- belongs_to :items
