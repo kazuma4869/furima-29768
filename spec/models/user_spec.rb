@@ -94,14 +94,14 @@ RSpec.describe User, type: :model do
       @user.password = "aaaaaaa"
       @user.password_confirmation = "aaaaaaa"
       @user.valid?
-      expect(@user.errors.full_messages).to include()
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
 
     it "passwordが数字のみであれば登録できないこと" do
       @user.password = "111111"
       @user.password_confirmation = "111111"
       @user.valid?
-      expect(@user.errors.full_messages).to include()
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end
 
     it "passwordが6文字以上であれば登録できること" do

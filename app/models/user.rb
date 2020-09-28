@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :last_name, format: /\A[ぁ-んァ-ン一-龥]+\z/
   validates :password, length: { minimum:6}
   validates :password, confirmation: true
-  validates :password, format: /\A[A-Za-z0-9]+\z/
+  validates :password, format: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d]{6,}$+\z/
   validates :first_name_kana, presence: true
   validates :first_name_kana, format: /\A([ァ-ン]|ー)+$+\z/
   validates :last_name_kana, presence: true
