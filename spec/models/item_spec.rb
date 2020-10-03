@@ -16,6 +16,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Name can't be blank")
     end
 
+    it "nameが40文字以上では登録できないこと" do
+      @item.name = "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Name is too long (maximum is 40 characters)")
+    end
+
     it "explainが空では登録できないこと" do
       @item.explain = nil
       @item.valid?
@@ -39,6 +45,12 @@ RSpec.describe Item, type: :model do
       @item.price = "300"
       @item.valid?
       expect(@item.errors.full_messages).to include("Price must be greater than 300")
+    end
+
+    it "priceが999999より大きければ登録できないこと" do
+      @item.price = "1000000"
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price must be less than 999999")
     end
 
     it "category_idが1では登録できないこと" do
