@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :item do
+  factory :pres do
     house_code              {"666-6666"}
     prefecture_id           {"2"}
     city                    {"大川市"}
