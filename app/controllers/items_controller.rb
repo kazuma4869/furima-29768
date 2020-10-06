@@ -22,13 +22,13 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    
   end
 
   def update
-    
     if @item.update(item_params)
       redirect_to root_path
+    else
+      render "new"
     end
   end
 
@@ -36,13 +36,13 @@ class ItemsController < ApplicationController
   end
 
   def show
-   
   end
   
   private
   def find_params
     @item = Item.find(params[:id])
   end
+
   def item_params
     params.require(:item).permit(:name,:image, :price, :explain, :category_id, :status_id, :fee_id, :prefecture_id, :shipment_id).merge(user_id: current_user.id)
   end
