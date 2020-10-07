@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipment
   has_one_attached :image
   belongs_to :user
+  has_one :manegement
 
   validates :name, length: { maximum:40}
   validates :explain, length: { maximum:1000}
