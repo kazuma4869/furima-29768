@@ -13,7 +13,6 @@ class PresController < ApplicationController
   end
 
   def new
-    @pre_management = PreManagement.new
   end
 
   def create
