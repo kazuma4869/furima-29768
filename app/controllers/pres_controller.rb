@@ -1,5 +1,6 @@
 class PresController < ApplicationController
   before_action :move_to_index
+  before_action :select_item, only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
@@ -11,11 +12,14 @@ class PresController < ApplicationController
   end
 
   def create
-    pre_management = PreManagement.new(pre_params)
-    pay_item
-    User.create(user_params(pre))
-    Item.create(item_params(pre))
-    redirect_to action: :index
+    @pre_management = PreManagement.new(pre_params)
+    if @pre_management.valid?
+      pay_item
+      @pre_management.save
+      redirect_to root_path
+    else
+      render action: :index
+    end
   end
 
   private
@@ -27,27 +31,20 @@ class PresController < ApplicationController
   end
 
   def pre_params
-    params.require(:pre_management).permit(:house_code, :city, :house_address, :prefecture_id, :telephone).merge(user_id: current_user.id)
-  end
-
-  def user_params(pre)
-    params.permit(:user_id).merge(user_id: user.id)
-  end
-
-  def item_params(pre)
-    params.permit(:item_id).merge(user_id: user.id)
-  end
-
-  def order_params
-    params.permit(:price, :token)
+    params.require(:pre_management).permit(:house_code, :city, :house_address, :house_name, :prefecture_id, :telephone, :user_id, :token).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_5245e3fd7e4e18c37bcff5c3"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: order_params[:price],  # 商品の値段
-      card: order_params[:token],    # カードトークン
+      amount: @item.price,  # 商品の値段
+      card: pre_params[:token],    # カードトークン
       currency:'jpy'                 # 通貨の種類(日本円)
     )
   end
+
+  def select_item
+    @item = Item.find(params[:item_id])
+  end
+
 end
