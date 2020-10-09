@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   #before_action :authenticate_user!
   #before_action :user_signed_in
-  before_action :find_params,except:[:index]
+  before_action :find_params,except:[:index,:new,:create]
   before_action :move_to_index,except: [:index,:show]
 
   def index
@@ -57,6 +57,5 @@ class ItemsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
 
 end

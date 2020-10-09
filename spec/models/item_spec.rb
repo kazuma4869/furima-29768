@@ -83,5 +83,11 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Status must be other than 1")
     end
 
+    it 'imageが空では保存できないこと' do
+      @item.image = nil
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Image can't be blank")
+    end
+
   end
 end

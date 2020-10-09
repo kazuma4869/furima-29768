@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :shipment
   has_one_attached :image
   belongs_to :user
+  has_one :management
 
   validates :name, length: { maximum:40}
   validates :explain, length: { maximum:1000}
@@ -18,5 +19,10 @@ class Item < ApplicationRecord
   validates :shipment_id, numericality: { other_than: 1 } 
   #空の投稿を保存できないようにする
   validates :name, :explain, :price, presence: true
-  #ジャンルの選択が「--」の時は保存できないようにする 
+  #ジャンルの選択が「--」の時は保存できないようにする
+  validates :image, presence: true, unless: :was_attached?
+ 
+  def was_attached?
+    self.image.attached?
+  end
 end
