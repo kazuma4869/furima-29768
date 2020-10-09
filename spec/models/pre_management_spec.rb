@@ -11,7 +11,12 @@ RSpec.describe PreManagement, type: :model do
     it "全て入力できていれば保存ができること" do
       expect(@pre_management).to be_valid
     end
-  
+
+    it "house_nameが空でも購入できること" do
+      @pre_management.house_name = nil
+      expect(@pre_management).to be_valid
+    end
+    
     it "house_codeが空では登録できないこと" do
       @pre_management.house_code = nil
       @pre_management.valid?

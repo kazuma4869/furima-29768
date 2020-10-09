@@ -1,10 +1,15 @@
 class PresController < ApplicationController
+  before_action :authenticate_user!
   before_action :move_to_index
   before_action :select_item, only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
-    @pre_management = PreManagement.new
+    unless current_user.id == @item.user_id
+      @pre_management = PreManagement.new
+    else
+      redirect_to root_path
+    end
   end
 
   def new
