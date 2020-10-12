@@ -17,7 +17,10 @@
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
-      
+      ¥<%= @item.price %>
+    </div>
+    <div class="item-postage">
+      （税込み）
     </div>
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>

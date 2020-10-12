@@ -5,7 +5,8 @@ class PresController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
-    unless current_user.id == @item.user_id
+
+    unless current_user.id == @item.user_id || @item.management.present?
       @pre_management = PreManagement.new
     else
       redirect_to root_path
